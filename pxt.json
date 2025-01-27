@@ -2,16 +2,7 @@
     "name": "Dioalog ",
     "description": "",
     "dependencies": {
-        "device": "*",
-        "darts": "*",
-        "Timers": "github:microsoft/arcade-timers#v1.1.0",
-        "arcade-story": "github:microsoft/arcade-storytelling#v1.0.3",
-        "arcade-fancy-text": "github:riknoll/arcade-fancy-text#v0.1.1",
-        "arcade-brohann-3d": "github:Brohann3214/arcade-brohann-3d#v0.5.2",
-        "pxt-status-bar": "github:jwunderl/pxt-status-bar#v0.4.2",
-        "arcade-minimap": "github:microsoft/arcade-minimap#v0.6.1",
-        "arcade-text": "github:microsoft/arcade-text#v1.3.0",
-        "arcade-character-animations": "github:microsoft/arcade-character-animations#v0.0.2"
+        "device": "*"
     },
     "files": [
         "main.blocks",

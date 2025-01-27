@@ -162,16 +162,9 @@ namespace custom {
      * @param s describe parameter here, eg: "Hello"
      * @param e describe parameter here
      */
-   
-    //% block="Set Dialog Image to $image2||"
-      //% image2.shadow=screen_image_picker
-
-    export function fo(image2: Image): void {
-        character.setImage(image2)
-        character.setPosition(35, 35)
-        }
         //%handlerStatement
         //%block="create Dialog sentence $s with character name %s2"
+        //%group="Create"
     export function fooo(s: string, s2: string, handler: () => void ){
         dialogFrame.setImage(img`
             111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
@@ -348,6 +341,14 @@ namespace custom {
         })
       
         }
+
+    //% block="Set Dialog Image to $image2||"
+    //% image2.shadow=screen_image_picker
+    //%group="Customize"
+    export function fo(image2: Image): void {
+        character.setImage(image2)
+        character.setPosition(35, 35)
+    }
     //%block="set Dialog character name color to $g"
     //%g.shadow="colorindexpicker"
     export function fd(g: number): void {
@@ -355,11 +356,13 @@ namespace custom {
     }
     //%block="set Dialog text color to $g"
     //%g.shadow="colorindexpicker"
+     //%group="Customize"
     export function fdd(g: number): void {
         color2 = g
     }
     //%block="set Dialog box color to  $g"
     //%g.shadow="colorindexpicker"
+     //%group="Customize"
     export function fdddd(g: number): void {
         dialogFrame.image.replace(1, g)
         }
