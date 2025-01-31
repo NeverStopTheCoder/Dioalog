@@ -304,6 +304,11 @@ namespace custom {
                 handler();
                 }
         })
+        controller.B.onEvent(ControllerButtonEvent.Pressed, function() {
+            currentIndex--
+            currentIndex--
+            currentIndex--
+        })
         // Handler for when all lines have been displayed
         // You can also trigger other actions here, like playing a sound, changing scenes, etc.
         function onAllLinesDisplayed() {
