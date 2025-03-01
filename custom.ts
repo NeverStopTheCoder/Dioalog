@@ -148,8 +148,8 @@ let character = sprites.create(img`
     ................................................................
 `, SpriteKind.Player)
 dialogFrame.setFlag(SpriteFlag.RelativeToCamera, true)
-let color = 2
-let color2 = 15
+let color11 = 2
+let color22 = 15
 /**
  * Custom blocks
  */
@@ -233,7 +233,7 @@ namespace custom {
                 t2 + e2,
                 x + -124,
                 y + -35,
-        /** white **/ color,
+        /** white **/ color11,
                 image.font8
             );
 
@@ -339,14 +339,14 @@ namespace custom {
         scene.createRenderable(0, function (target: Image, camera: scene.Camera) {
             for (let i = 0; i < maxLines; i++) { // Use maxLines here to control how many lines are shown
                 if (currentIndex + i < lines.length) {
-                    target.print(lines[currentIndex + i], 10, 80 + i * 10, color2,) // Print each line
+                    target.print(lines[currentIndex + i], 10, 80 + i * 10, color22,) // Print each line
                    
                 }
             }
         })
       
         }
-
+ 
     //% block="Set Dialog Image to $image2||"
     //% image2.shadow=screen_image_picker
     //%group="Customize"
@@ -357,13 +357,13 @@ namespace custom {
     //%block="set Dialog character name color to $g"
     //%g.shadow="colorindexpicker"
     export function fd(g: number): void {
-        color = g    
+        color11 = g    
     }
     //%block="set Dialog text color to $g"
     //%g.shadow="colorindexpicker"
      //%group="Customize"
     export function fdd(g: number): void {
-        color2 = g
+        color22 = g
     }
     //%block="set Dialog box color to  $g"
     //%g.shadow="colorindexpicker"
