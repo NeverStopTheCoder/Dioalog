@@ -150,6 +150,25 @@ let character = sprites.create(img`
 dialogFrame.setFlag(SpriteFlag.RelativeToCamera, true)
 let color11 = 2
 let color22 = 15
+let cho = false
+let cur = sprites.create(img`
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+`, SpriteKind.Player)
 /**
  * Custom blocks
  */
@@ -163,9 +182,10 @@ namespace custom {
      * @param e describe parameter here
      */
         //%handlerStatement
-        //%block="create Dialog sentence $s with character name %s2"
+        //%block="create Dialog sentence $s with character name $s2 with choice $c and $c2 $on"
         //%group="Create"
-    export function fooo(s: string, s2: string, handler: () => void ){
+    export function fooo(s: string, s2: string,c:string,c2:string,on:boolean,handler: () => void){
+         
         dialogFrame.setImage(img`
             111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
             111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
@@ -228,7 +248,7 @@ namespace custom {
             const x = target.width - w - 1;
             const y = target.height - h - 1;
             // Fill it in with whatever else you want
-            // text
+            // text 
             screen.print(
                 t2 + e2,
                 x + -124,
@@ -281,6 +301,26 @@ namespace custom {
                 `)
                 t2 = ""
                 e2 = ""
+                c = ""
+                c2 = ""  
+                cur.setImage(img`
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                `)
                 lines = []
                 character.setImage(img`
                     . . . . . . . . . . . . . . . .
@@ -319,7 +359,7 @@ namespace custom {
         // Ensure currentIndex starts at 0 to show the first line      
         // Global variables for text handling
         let text = s
-        
+if (on == false) {
         // Set how many lines are shown at once
         maxLines = 3
         // Text wrapping logic
@@ -344,9 +384,94 @@ namespace custom {
                 }
             }
         })
-      
-        }
+}else {
+   cho = true
+    scene.createRenderable(scene.HUD_Z, function (target, camera) {
+        const w = 30;
+        const h = 15;
+        const x = target.width - w - 1;
+        const y = target.height - h - 1;
+        // Fill it in with whatever else you want
+        // text 
+         screen.print(
+            c,
+            x + -10,
+            y + -25,
+        /** white **/ color11,
+            image.font8
+        ); screen.print(
+            c2,
+            x + -10,
+            y + -10,
+        /** white **/ color11,
+            image.font8
+        );
+    })
  
+cur.setImage(img`
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . 2 . . . . . . . .
+    . . . . . . . 2 2 . . . . . . .
+    . . . . . . . 2 2 2 . . . . . .
+    . . . . . . . 2 2 . . . . . . .
+    . . . . . . . 2 . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+`)
+  cur.x = 115
+  cur.y = 83
+controller.up.onEvent(ControllerButtonEvent.Pressed, function() {
+    if (cho === false) {
+        cur.y -= 15
+        cho = true
+    } else {
+        cur.y += 15
+        cho = false
+    }
+})
+controller.down.onEvent(ControllerButtonEvent.Pressed, function() {
+    if (cho === true) {
+cur.y += 15
+cho = false
+    } else {
+        cur.y -= 15
+        cho = true
+    }
+})
+    // Set how many lines are shown at once
+    maxLines = 3
+    // Text wrapping logic
+    let words = text.split(" ")
+    for (let word of words) {
+        if (("" + currentLine + word).length > 15) {
+            // Wrap text at 20 characters per line
+            lines.push(currentLine.trim())
+            currentLine = "" + word + " "
+        } else {
+            currentLine = "" + currentLine + word + " "
+        }
+    }
+    if (currentLine.trim().length > 0) {
+        lines.push(currentLine.trim())
+    }
+    scene.createRenderable(0, function (target: Image, camera: scene.Camera) {
+        for (let i = 0; i < maxLines; i++) { // Use maxLines here to control how many lines are shown
+            if (currentIndex + i < lines.length) {
+                target.print(lines[currentIndex + i], 10, 80 + i * 10, color22,) // Print each line
+
+            }
+        }
+    })
+} 
+}
     //% block="Set Dialog Image to $image2||"
     //% image2.shadow=screen_image_picker
     //%group="Customize"
@@ -371,4 +496,9 @@ namespace custom {
     export function fdddd(g: number): void {
         dialogFrame.image.replace(1, g)
         }
+    //%block="Dialog choice"
+    //%group="Customize"
+    export function fdddd2(): boolean {
+       return cho
     }
+}
