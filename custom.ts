@@ -388,19 +388,8 @@ if (on == false) {
         const y = target.height - h - 1;
         // Fill it in with whatever else you want
         // text 
-         screen.print(
-            c,
-            x + -10,
-            y + -25,
-        /** white **/ color11,
-            image.font8
-        ); screen.print(
-            c2,
-            x + -10,
-            y + -10,
-        /** white **/ color11,
-            image.font8
-        );
+        target.print(c, dialogFrame.x + 50, dialogFrame.y - 10, color11, image.font8)
+        target.print(c2, dialogFrame.x + 50, dialogFrame.y + 10, color11, image.font8)
     })
  
 cur.setImage(img`
@@ -421,23 +410,23 @@ cur.setImage(img`
     . . . . . . . . . . . . . . . .
     . . . . . . . . . . . . . . . .
 `)
-  cur.x = 115
-  cur.y = 83
+  cur.x = dialogFrame.x + 45
+  cur.y = dialogFrame.y - 7
 controller.up.onEvent(ControllerButtonEvent.Pressed, function() {
     if (cho === false) {
-        cur.y -= 15
+        cur.y -= 20
         cho = true
     } else {
-        cur.y += 15
+        cur.y += 20
         cho = false
     }
 })
 controller.down.onEvent(ControllerButtonEvent.Pressed, function() {
     if (cho === true) {
-cur.y += 15
+cur.y += 20
 cho = false
     } else {
-        cur.y -= 15
+        cur.y -= 20
         cho = true
     }
 })
@@ -446,7 +435,7 @@ cho = false
     // Text wrapping logic
     let words = text.split(" ")
     for (let word of words) {
-        if (("" + currentLine + word).length > 15) {
+        if (("" + currentLine + word).length > 17) {
             // Wrap text at 20 characters per line
             lines.push(currentLine.trim())
             currentLine = "" + word + " "
@@ -460,7 +449,7 @@ cho = false
     scene.createRenderable(0, function (target: Image, camera: scene.Camera) {
         for (let i = 0; i < maxLines; i++) { // Use maxLines here to control how many lines are shown
             if (currentIndex + i < lines.length) {
-                target.print(lines[currentIndex + i], 10, 80 + i * 10, color22,) // Print each line
+                target.print(lines[currentIndex + i], dialogFrame.x - 70, dialogFrame.y - 10 + i * 10, color22,) // Print each line
 
             }
         }
