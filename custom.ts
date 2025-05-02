@@ -238,7 +238,7 @@ namespace custom {
             111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
             111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
         `)
-        dialogFrame.setPosition(80, 90)
+        dialogFrame.setPosition(screen.width/2 - screen.width/2 + 80, screen.height - 30)
         dialogFrame.setFlag(SpriteFlag.RelativeToCamera, true)
         let e2 = ":"
         let t2 = s2
@@ -249,17 +249,12 @@ namespace custom {
             const y = target.height - h - 1;
             // Fill it in with whatever else you want
             // text 
-            screen.print(
-                t2 + e2,
-                x + -124,
-                y + -35,
-        /** white **/ color11,
-                image.font8
-            );
+            target.print(t2 + e2,dialogFrame.x - 70,dialogFrame.y - 20,color11,image.font8)
+           
 
             screen.print(
                 f,
-                x + -120,
+                x + dialogFrame.x - dialogFrame.x * 3 - 60,
                 y + -15,
         /** white **/ 0x2,
                 image.font8
@@ -379,7 +374,7 @@ if (on == false) {
         scene.createRenderable(0, function (target: Image, camera: scene.Camera) {
             for (let i = 0; i < maxLines; i++) { // Use maxLines here to control how many lines are shown
                 if (currentIndex + i < lines.length) {
-                    target.print(lines[currentIndex + i], 10, 80 + i * 10, color22,) // Print each line
+                    target.print(lines[currentIndex + i], screen.width/2 - screen.width/2 + 5, screen.height - 40 + i * 10, color22,) // Print each line
                    
                 }
             }
